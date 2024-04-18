@@ -24,7 +24,7 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
-# Ruta para manejar la carga de archivos de video
+# Ruta para manejar la carga de archivos de videos
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
