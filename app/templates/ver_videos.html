@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Videos</title>
+    <style>
+        /* Estilo para los contenedores de video */
+        .video-container {
+            width: 200px; /* Ancho del contenedor */
+            height: 200px; /* Altura del contenedor */
+            margin: 10px; /* Margen entre los contenedores */
+            float: left; /* Para alinear los contenedores en una cuadrícula */
+            background-color: #f0f0f0; /* Color de fondo */
+            overflow: hidden; /* Para ocultar cualquier contenido que se desborde */
+        }
+        
+        /* Estilo para los videos */
+        .video {
+            width: 100%; /* Ancho del video */
+            height: 100%; /* Altura del video */
+            object-fit: cover; /* Para asegurar que el video cubra todo el contenedor */
+        }
+    </style>
+</head>
+<body>
+    <h2>Videos</h2>
+    <div class="videos-container">
+        {% for video in videos %}
+        <div class="video-container">
+            <video class="video" controls>
+                <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
