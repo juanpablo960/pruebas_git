@@ -5,33 +5,55 @@
     <style>
         /* Estilo para los contenedores de video */
         .video-container {
-            width: 200px; /* Ancho del contenedor */
-            height: 200px; /* Altura del contenedor */
+            width: 200px; /* Ancho del contenedor (ajustado) */
+            height: auto; /* Altura del contenedor (ajustado) */
             margin: 10px; /* Margen entre los contenedores */
             float: left; /* Para alinear los contenedores en una cuadrícula */
             background-color: #f0f0f0; /* Color de fondo */
             overflow: hidden; /* Para ocultar cualquier contenido que se desborde */
+            position: relative; /* Para posicionar los botones */
         }
         
         /* Estilo para los videos */
         .video {
             width: 100%; /* Ancho del video */
-            height: 100%; /* Altura del video */
+            height: auto; /* Altura del video */
             object-fit: cover; /* Para asegurar que el video cubra todo el contenedor */
+        }
+        
+        /* Estilo para el botón de eliminar */
+        .delete-button {
+            position: absolute; /* Posición absoluta en relación al contenedor */
+            top: 5px; /* Posición desde arriba */
+            right: 5px; /* Posición desde la derecha */
+            background-color: #ff0000; /* Color del botón */
+            color: #ffffff; /* Color del texto */
+            border: none; /* Sin borde */
+            padding: 5px 10px; /* Espaciado dentro del botón */
+            cursor: pointer; /* Cursor de puntero */
         }
     </style>
 </head>
 <body>
     <h2>Videos</h2>
-    <div class="videos-container">
-        {% for video in videos %}
-        <div class="video-container">
-            <video class="video" controls>
-                <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
+    <form action="/delete_video" method="post">
+        <div class="videos-container"> <!-- Cambio de clase a "videos-container" -->
+            {% if videos %}
+                {% for video in videos %}
+                <div class="video-container">
+                    <video class="video" controls>
+                        <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                    <p>{{ video.name }}</p> <!-- Mostrar el nombre del video -->
+                    <input type="checkbox" name="videos_to_delete" value="{{ video.filename }}"> Seleccionar <!-- Checkbox para seleccionar -->
+                    <button type="submit" class="delete-button" name="delete_button" value="{{ video.filename }}">Eliminar</button> <!-- Botón para eliminar -->
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay videos disponibles.</p> <!-- Mensaje cuando no hay videos -->
+            {% endif %}
         </div>
-        {% endfor %}
-    </div>
+    </form>
 </body>
 </html>
