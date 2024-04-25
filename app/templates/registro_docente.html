@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REGISTRO DE DOCENTES</title>
+    <style>
+        /* Establecer un diseño de rejilla simple */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+            grid-gap: 10px; /* Espacio entre las celdas */
+        }
+
+        /* Estilo para las etiquetas */
+        label {
+            font-weight: bold; /* Texto en negrita */
+        }
+
+        /* Estilo para el campo de descripción */
+        #descripcion {
+            width: 100%;
+            height: 80px; /* Ajusta la altura según sea necesario */
+        }
+
+        /* Estilo para el botón de seleccionar archivo */
+        #seleccionar-archivo {
+            margin-top: 10px; /* Espacio por encima del botón */
+        }
+
+        /* Estilo para el botón de registrar */
+        #boton-registrar {
+            grid-column: span 2; /* Ocupa las dos columnas */
+            justify-self: center; /* Centra el botón horizontalmente */
+            margin-top: 20px; /* Espacio por encima del botón */
+        }
+    </style>
+</head>
+<body>
+    <h1>REGISTRO DE DOCENTES</h1>
+    
+    <!-- Mensaje de confirmación o error -->
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+    
+    <form action="/registrar_docente" method="post" enctype="multipart/form-data">
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+
+        <label for="especialidad">Especialidad:</label>
+        <input type="text" id="especialidad" name="especialidad" required>
+
+        <label for="nacionalidad">Nacionalidad:</label>
+        <input type="text" id="nacionalidad" name="nacionalidad" required>
+
+        <label for="foto">Foto:</label>
+        <input type="file" id="foto" name="foto">
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
+
+        <!-- Botón de selección de archivo adjunto -->
+        <input type="file" id="adjuntar-archivo" name="adjuntar-archivo" style="display: none;">
+        <label for="adjuntar-archivo">Adjuntar archivo</label>
+        <button id="seleccionar-archivo">Seleccionar archivo</button>
+
+        <input id="boton-registrar" type="submit" value="Registrar"> <!-- Botón de registrar -->
+    </form>
+</body>
+</html>
